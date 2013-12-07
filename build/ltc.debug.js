@@ -64,7 +64,9 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
         },
 
         _checkChange: function () {
-            var newVal = parseFloat(this.$target.html().substr(1));
+            var integer = $('#marketLastInteger .red').html().substr(1);
+            var point = $('#marketLastPoint').html();
+            var newVal = parseFloat(integer + point);
             var oldVal = this.oldVal;
             var diff = Math.abs(newVal - oldVal);
 
@@ -72,7 +74,7 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
 
             if (diff >= this.opts.minDiff) {
                 var trend = parseFloat(newVal) > parseFloat(oldVal) ? '升了 ' : '降了 ';
-                var text = trend + diff +  '  ' + '现在 ' + newVal;
+                var text = trend + diff.toFixed(2) +  '  ' + '现在 ' + newVal;
                 this.desktopNotify(text);
 
                 this.oldVal = newVal;
