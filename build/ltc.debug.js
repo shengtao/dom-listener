@@ -13,6 +13,7 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
             // attrs: [], // 监听属性
             notify: true, // 桌面通知否?
             interval: 1000,
+            minDiff: 5,
             notifyOpts: {
                 openUrl: location.href, // 跳转默认为当前url
                 icon: 'http://i.stack.imgur.com/dmHl0.png',
@@ -30,15 +31,16 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
 
             this.$target = $(this.opts.target);
 
-            if (!this.$target) {
+            if (!this.$target.length) {
                 console.warn('监听目标没有被找到');
+                return;
             }
 
             // 默认监听innerHTML的变化
             // this.attr = this.opts.attr || ['html'];
 
             this.tick = null;
-            this.oldVal = null; // value before change
+            this.oldVal = 0; // value before change
 
             this.addEvents();
             this.startListen();
@@ -46,10 +48,7 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
 
         addEvents: function () {
             var that = this;
-
-            $(document).on('dom:changed', function (e, attr, newVal, oldVal) {
-                that._changeHandler(newVal, oldVal);
-            });
+            // add events here
         },
 
         // 开始监听
@@ -65,23 +64,16 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
         },
 
         _checkChange: function () {
-            var newVal = this.$target.html();
+            var newVal = parseFloat(this.$target.html().substr(1));
             var oldVal = this.oldVal;
+            var diff = Math.abs(newVal - oldVal);
 
-            if (newVal != oldVal) {
-                $(document.body).trigger('dom:changed', ['html', newVal, oldVal]);
-                this.oldVal = newVal;
-            }
-        },
-
-        _changeHandler: function (newVal, oldVal) {
-            if (this.opts.notify) {
-                var trend = parseFloat(newVal) > parseFloat(oldVal) ? '升了' : '降了';
-                var text = trend + ': ' + '原 ' + oldVal + '; 现 ' + newVal;
+            if (diff >= this.opts.minDiff) {
+                var trend = parseFloat(newVal) > parseFloat(oldVal) ? '升了 ' : '降了 ';
+                var text = trend + diff +  '  ' + '现在 ' + newVal;
                 this.desktopNotify(text);
-            } else {
-                // tobe: 可能还有其他的打印方式
-                console.log(attrs);
+
+                this.oldVal = newVal;
             }
         },
 
@@ -103,12 +95,17 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
                 }
 
                 notification.show();
+
+                setTimeout(function () {
+                    notification.cancel();
+                }, 3000)
+
             } else {
                 window.webkitNotifications.requestPermission();
             }
         }
     }
-})(window.lib || {});
+})(window.lib || (window.lib = {}));
 ;(function () {
     var domListener = lib.domListener;
 
