@@ -1,20 +1,13 @@
-(function ($) {
-    setInterval(function () {
-        var currentRMB = $('.lightorange1').html();
+/*
+* @require zepto, lib/dom-listener.js
+* */
 
-        console.log(currentRMB);
+;(function () {
+    var domListener = lib.domListener;
 
-        if (currentRMB) {
-            play();
-        }
-    }, 1000)
+    console.log(location.href);
 
-    function play()
-    {
-        var embed=document.createElement('object');
-        embed.setAttribute('type','audio/ogg');
-        embed.setAttribute('data', 'http://www.w3schools.com/tags/horse.ogg');
-        embed.setAttribute('autostart', true);
-        document.getElementsByTagName('body')[0].appendChild(embed);
-    }
-})(jQuery)
+    domListener.init({
+        target: '.newvalue .red'
+    });
+})()

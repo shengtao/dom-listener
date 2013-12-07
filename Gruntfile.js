@@ -21,8 +21,8 @@ module.exports = function(grunt) {
 			},
 		
 			index: {
-				src: ['src/lib/jquery.js', 'src/extension.js'],
-				dest: '<%= distPath %>/jquery.js'
+				src: ['src/lib/zepto.js', 'src/lib/dom-listener.js', 'src/ltc.js'],
+				dest: '<%= distPath %>/ltc.debug.js'
 			}
 		},
 
@@ -35,12 +35,7 @@ module.exports = function(grunt) {
 					dest: '<%= distPath %>',
 					ext: '.js'
 				}]
-			},
-
-            identify: {
-                src: ['<%= distPath %>/identify.debug.js'],
-                dest: '<%= distPath %>/identify.js'
-            }
+			}
 		},
 
 		cssmin: {
@@ -72,5 +67,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('build', ['concat']);
+	grunt.registerTask('build', ['concat', 'uglify']);
 }
