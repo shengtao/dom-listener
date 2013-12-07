@@ -114,4 +114,4 @@
             }
         }
     }
-})(window.lib || {})
+})(window.lib || {});
