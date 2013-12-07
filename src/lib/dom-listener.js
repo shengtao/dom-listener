@@ -23,7 +23,8 @@
             notifyOpts: {
                 openUrl: location.href, // 跳转默认为当前url
                 icon: 'http://i.stack.imgur.com/dmHl0.png',
-                title: '价格动态'
+                title: '价格动态',
+                stayTime: 10000
             }
         },
 
@@ -108,7 +109,7 @@
 
                 setTimeout(function () {
                     notification.cancel();
-                }, 3000)
+                }, opts.stayTime)
 
             } else {
                 window.webkitNotifications.requestPermission();

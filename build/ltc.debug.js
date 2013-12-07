@@ -17,7 +17,8 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
             notifyOpts: {
                 openUrl: location.href, // 跳转默认为当前url
                 icon: 'http://i.stack.imgur.com/dmHl0.png',
-                title: '价格动态'
+                title: '价格动态',
+                stayTime: 10000
             }
         },
 
@@ -102,7 +103,7 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
 
                 setTimeout(function () {
                     notification.cancel();
-                }, 3000)
+                }, opts.stayTime)
 
             } else {
                 window.webkitNotifications.requestPermission();
@@ -116,7 +117,10 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
     console.log(location.href);
 
     domListener.init({
-        target: '.newvalue .red',
-        minDiff: '0.5'
+        minDiff: '0.5',
+        notifyOpts: {
+            openUrl: 'https://www.okcoin.com/buy.do',
+            stayTime: 8000
+        }
     });
 })()

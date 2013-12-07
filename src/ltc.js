@@ -8,7 +8,10 @@
     console.log(location.href);
 
     domListener.init({
-        target: '.newvalue .red',
-        minDiff: '0.5'
+        minDiff: '0.5',
+        notifyOpts: {
+            openUrl: 'https://www.okcoin.com/buy.do',
+            stayTime: 8000
+        }
     });
 })()
