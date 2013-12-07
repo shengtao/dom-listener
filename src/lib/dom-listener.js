@@ -14,7 +14,7 @@
 
     lib.domListener = {
         defaultOpts: {
-            target: '', // 监听目标
+            //target: '', // 监听目标
             // tobe: 现在是innerHTML
             // attrs: [], // 监听属性
             notify: true, // 桌面通知否?
@@ -30,18 +30,18 @@
 
         init: function (opts) {
             this.opts = $.extend(true, {}, this.defaultOpts, opts);
-
-            if (!this.opts.target) {
-                console.error('监听目标没有被设定');
-                return;
-            }
-
-            this.$target = $(this.opts.target);
-
-            if (!this.$target.length) {
-                console.warn('监听目标没有被找到');
-                return;
-            }
+//
+//            if (!this.opts.target) {
+//                console.error('监听目标没有被设定');
+//                return;
+//            }
+//
+//            this.$target = $(this.opts.target);
+//
+//            if (!this.$target.length) {
+//                console.warn('监听目标没有被找到');
+//                return;
+//            }
 
             // 默认监听innerHTML的变化
             // this.attr = this.opts.attr || ['html'];
