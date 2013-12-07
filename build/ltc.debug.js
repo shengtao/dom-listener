@@ -68,6 +68,8 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
             var oldVal = this.oldVal;
             var diff = Math.abs(newVal - oldVal);
 
+            console.log(newVal);
+
             if (diff >= this.opts.minDiff) {
                 var trend = parseFloat(newVal) > parseFloat(oldVal) ? '升了 ' : '降了 ';
                 var text = trend + diff +  '  ' + '现在 ' + newVal;
@@ -112,6 +114,7 @@ var Zepto=function(){function G(a){return a==null?String(a):z[A.call(a)]||"objec
     console.log(location.href);
 
     domListener.init({
-        target: '.newvalue .red'
+        target: '.newvalue .red',
+        minDiff: '0.5'
     });
 })()
