@@ -8,6 +8,7 @@
     console.log(location.href);
 
     domListener.init({
-        target: '.newvalue .red'
+        target: '.newvalue .red',
+        minDiff: '0.5'
     });
 })()
