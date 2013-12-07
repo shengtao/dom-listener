@@ -77,7 +77,10 @@
             var oldVal = this.oldVal;
             var diff = Math.abs(newVal - oldVal);
 
-            console.log(newVal);
+            // 记录变更历史
+            if (diff > 0) {
+                console.log(newVal);
+            }
 
             if (diff >= this.opts.minDiff) {
                 var trend = parseFloat(newVal) > parseFloat(oldVal) ? '升了 ' : '降了 ';
