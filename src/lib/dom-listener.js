@@ -5,7 +5,7 @@
  * Time: 上午10:47
  * To change this template use File | Settings | File Templates.
  */
-(function (lib) {
+;(function (lib) {
     if (typeof Zepto === 'undefined') {
         console.error('请加载Zepto库哦');
         return;
