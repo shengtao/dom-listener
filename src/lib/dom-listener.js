@@ -74,6 +74,8 @@
             var oldVal = this.oldVal;
             var diff = Math.abs(newVal - oldVal);
 
+            console.log(newVal);
+
             if (diff >= this.opts.minDiff) {
                 var trend = parseFloat(newVal) > parseFloat(oldVal) ? '升了 ' : '降了 ';
                 var text = trend + diff +  '  ' + '现在 ' + newVal;
